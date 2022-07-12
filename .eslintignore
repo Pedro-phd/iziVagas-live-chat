@@ -1,0 +1,10 @@
+node_modules
+coverage
+.eslintcache
+public
+dist
+*.scss
+*.json
+sb
+.env
+.orig
