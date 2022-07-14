@@ -20,7 +20,7 @@
 
     <script src="/socket.io/socket.io.js"></script>
     <script>
-      var socket = io('http://localhost:3000/');
+      var socket = io(window.location.href.replace('suport',''));
       const username = window.localStorage.getItem('username')
       var messages = document.getElementById('messages');
       var form = document.getElementById('form');
