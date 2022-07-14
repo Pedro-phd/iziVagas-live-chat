@@ -6,21 +6,29 @@ const http = require("http");
 const server = http.createServer(app);
 const { Server } = require("socket.io");
 const io = new Server(server);
+const path = require("path");
 
 const port = process.env.PORT || 3000;
+const previousMsg = [];
 
 app.use(express.json());
+app.use(express.static(path.join(__dirname, "public")));
+app.set("views", path.join(__dirname, "public"));
+app.engine("html", require("ejs").renderFile);
+app.set("views engine", "html");
 
 app.get("/", (req, res) => {
-  res.sendFile(__dirname + "/pages/index.html");
+  res.render("index.html");
 });
-app.get("/chat", (req, res) => {
-  res.sendFile(__dirname + "/pages/chat.html");
+app.get("/suport", (req, res) => {
+  res.render("chat.html");
 });
 
 io.on("connection", (socket) => {
-  socket.on("chat message", (msg) => {
-    io.emit("chat message", msg);
+  io.emit("previous", previousMsg);
+  socket.on("chat", (msg) => {
+    io.emit("chat", msg);
+    previousMsg.push(msg);
   });
 });
 

@@ -1,0 +1,49 @@
+body {
+  background-color: rgb(226, 226, 226);
+}
+.suport {
+  width: 50%;
+  background-color: white;
+  border-radius: 16px;
+  height: 500px;
+  margin: 0 auto;
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+form {
+  margin-top: auto;
+  justify-self: flex-end;
+  width: 100%;
+  background-color: #3d3d3d;
+  border-radius: 16px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 15px;
+  gap: 15px;
+  box-sizing: border-box;
+}
+button {
+  border: none;
+  background: none;
+  color: purple;
+  background-color: white;
+  border-radius: 8px;
+  padding: 5px;
+}
+
+input {
+  width: 100%;
+  border: none;
+  padding: 5px;
+  border-radius: 8px;
+}
+
+ul {
+  padding: 15px;
+}

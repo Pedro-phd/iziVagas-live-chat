@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>iziVagas - suporte</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <link rel="stylesheet" href="./reset.css"/>
+    <link rel="stylesheet" href="suport.css">
+  </head>
+  <body>
+
+    <div class="suport">
+      <ul id="messages"></ul>
+      <form id="form" action="">
+        <input id="input" autocomplete="off" placeholder="Mensagem" /><button>Enviar</button>
+      </form>
+    </div>
+
+    
+  </body>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      var socket = io('http://localhost:3000/');
+      const username = window.localStorage.getItem('username')
+      var messages = document.getElementById('messages');
+      var form = document.getElementById('form');
+      var input = document.getElementById('input');
+
+      window.localStorage.setItem('deviceId', new Date())
+      const deviceId = window.localStorage.getItem('deviceId')
+
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        if (input.value) {
+          socket.emit('chat', {msg: input.value, user: username, deviceId: deviceId });
+          input.value = '';
+        }
+      });
+
+
+
+      socket.on('previous', data => {
+        data.map(msg => {
+          var item = document.createElement('li');
+          item.textContent = `${msg.user}:  ${msg.msg}`;
+          if(msg.deviceId === deviceId) {
+            item.className = 'self'
+          }else {
+            item.className = 'he'
+          }
+          messages.appendChild(item);
+          window.scrollTo(0, document.body.scrollHeight);
+        })
+      })
+
+      socket.on('chat', function(msg) {
+        var item = document.createElement('li');
+        item.textContent = `${msg.user}:  ${msg.msg}`;
+        if(msg.deviceId === deviceId) {
+            item.className = 'self'
+          }else {
+            item.className = 'he'
+            const src = './sound.wav';
+            const audio = new Audio(src);
+            audio.play();
+          }
+        messages.appendChild(item);
+        window.scrollTo(0, document.body.scrollHeight);
+      });
+    </script>
+</html>

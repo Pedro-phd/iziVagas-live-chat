@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>iziVagas - live chat</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+  <link rel="stylesheet" href="./reset.css"/>
+  <link rel="stylesheet" href="./style.css"/>
+</head>
+<body>
+  <div class="container">
+    <h2>Suporte izi Vagas</h2>
+    <input type="text" id="username" name="username" placeholder="Nome" required>
+    <a href="/suport"> Iniciar suporte </a>
+  </div>
+</body>
+<script>
+  const btn = document.querySelector('a')
+  const username = document.querySelector('input').value
+  const input = document.querySelector('input')
+  input.addEventListener('change',(e) => {
+      console.log(e)
+      window.localStorage.setItem('username',input.value )
+    })
+</script>
+</html>
